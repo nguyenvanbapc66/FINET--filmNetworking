@@ -24,12 +24,12 @@ controller.register = async function(registerInfo){
         view.setText('register-error', err.message)
     }
     view.enable('register-submit-btn')
+    firebase.auth().signOut()
 }
 
 controller.login = async function(loginInfo){
     let email = loginInfo.email
     let password = loginInfo.password
-    console.log('logined')
 
     view.setText('login-error', '')
     view.disable('login-submit-btn')
@@ -41,6 +41,6 @@ controller.login = async function(loginInfo){
         }
     } catch(err){
         view.setText('login-error', err.message)
+        view.enable('login-submit-btn')
     }
-    view.enable('login-submit-btn')
 }

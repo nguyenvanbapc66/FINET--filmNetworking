@@ -34,7 +34,7 @@ components.register = `
             <div id="comfirm-password-error" class="message-error"></div>
         </div>
         <div id="register-error" class="message-error"></div>
-        <div id="register-sucess" class="message-error"></div>
+        <div id="register-sucess" class="message-sucess"></div>
     </div>
     <div class="form-footer">
         <div></div>
@@ -85,4 +85,15 @@ components.nav = `
     <span id="log-out">Avatar</span>
 </div>
 </nav>
+`
+
+components.management = `
+<form class="form-upload" id="form-upload">
+        <input type="file" name="chooser">
+        <button type="submit">Upload</button>
+        <span id="log-out">Avatar</span>
+</form>
+<div id="file-link" class="file-link">
+    <!-- file link will be written here -->
+</div>
 `

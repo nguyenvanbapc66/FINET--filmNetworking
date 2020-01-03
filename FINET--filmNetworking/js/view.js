@@ -35,18 +35,18 @@ view.showComponents = function (name) {
                 // 2. Validate info
                 let validateResult = [
                     view.validate(
-                        registerInfo.firstname, 
-                        'firstname-error', 
+                        registerInfo.firstname,
+                        'firstname-error',
                         'Please enter your firstname'
                     ),
                     view.validate(
-                        registerInfo.lastname, 
-                        'lastname-error', 
+                        registerInfo.lastname,
+                        'lastname-error',
                         'Please enter your lastname'
                     ),
                     view.validate(
-                        registerInfo.email.includes('@'), 
-                        'email-error', 
+                        registerInfo.email.includes('@'),
+                        'email-error',
                         'Invalid email'
                     ),
                     view.validate(
@@ -62,7 +62,7 @@ view.showComponents = function (name) {
                 ]
 
                 // 3. Submit info (next session)
-                if (allPassed(validateResult)){
+                if (allPassed(validateResult)) {
                     controller.register(registerInfo)
                 }
             }
@@ -83,7 +83,7 @@ view.showComponents = function (name) {
                 view.showComponents('register')
             }
 
-            function formLoginSubmitHandler(e){
+            function formLoginSubmitHandler(e) {
                 e.preventDefault()
 
                 // 1. Get info
@@ -95,36 +95,67 @@ view.showComponents = function (name) {
                 // 2. Validate info
                 let validateResult = [
                     view.validate(
-                        loginInfo.email.includes('@'), 
-                        'email-error', 
+                        loginInfo.email.includes('@'),
+                        'email-error',
                         'Please enter a valid email'
                     ),
                     view.validate(
-                        loginInfo.password && loginInfo.password >= 6, 
-                        'password-error', 
+                        loginInfo.password && loginInfo.password >= 6,
+                        'password-error',
                         'Your password length must be 6 or more'
                     )
                 ]
 
                 // 3. Submit info (next session)
-                if(allPassed(validateResult)){
+                if (allPassed(validateResult)) {
                     controller.login(loginInfo)
                 }
             }
 
             break
         }
-        case 'film':{
+        case 'film': {
             let app = document.getElementById('app')
             app.innerHTML = components.nav
 
             let logOut = document.getElementById('log-out')
             logOut.onclick = logOutClickHandler
 
-            function logOutClickHandler(){
+            function logOutClickHandler() {
                 firebase.auth().signOut()
                 view.showComponents('login')
             }
+            break
+        }
+        case 'management': {
+            let app = document.getElementById('app')
+            app.innerHTML = components.management
+
+            let logOut = document.getElementById('log-out')
+            logOut.onclick = logOutClickHandler
+
+            let form = document.getElementById('form-upload')
+            form.onsubmit = async function (e) {
+                e.preventDefault()
+
+                try {
+                    let files = form.chooser.files
+                    let file = files[0]
+                    if (!file) {
+                        throw new Error('Please choose a file!')
+                    }
+                    let link = await upload(file)
+                    document.getElementById('file-link').innerText = link
+                } catch (err) {
+                    alert(err.message)
+                }
+            }
+
+            function logOutClickHandler() {
+                firebase.auth().signOut()
+                view.showComponents('login')
+            }
+            break
         }
     }
 }
@@ -143,11 +174,11 @@ view.validate = function (condition, idErrorTag, messageError) {
     }
 }
 
-view.disable = function(id){
+view.disable = function (id) {
     document.getElementById(id).setAttribute('disabled', true)
 }
 
-view.enable = function(id){
+view.enable = function (id) {
     document.getElementById(id).removeAttribute('disabled')
 }
 

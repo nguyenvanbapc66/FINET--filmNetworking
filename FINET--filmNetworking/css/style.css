@@ -200,3 +200,31 @@ span:hover{
 .nav-contents-right{
     margin-left: auto;
 }
+
+/* management */
+.form-upload>*{    
+    margin: 5px 50px;
+}
+
+.form-upload{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.form-upload input{
+    height: 22px;
+}
+
+.form-upload button{
+    width: 10%;
+    height: 22px;
+}
+
+.form-upload span{
+    margin-left: auto;
+}
+
+.file-link{
+    text-decoration: underline;
+    color: #2980b9;
+}
