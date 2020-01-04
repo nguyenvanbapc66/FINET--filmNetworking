@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0px;
     margin: 0px;
     font-size: 13px;
@@ -7,29 +7,29 @@
     /* background: #24252A; */
 }
 
-body{
+body {
     background: #24252A;
     min-height: 100vh;
 }
 
-img{
+img {
     height: 50px;
     background-size: cover;
 }
 
-a{
+a {
     text-decoration: none;
     color: #edf0f1;
     font-weight: 600;
     transition: all 0.3s ease 0s;
 }
 
-a:hover{
+a:hover {
     cursor: pointer;
     color: #0088a9;
 }
 
-button{
+button {
     border: none;
     border-radius: 5px;
     width: 70%;
@@ -40,20 +40,20 @@ button{
     font-weight: 600;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
     background: rgba(0, 136, 169, 0.8);
 }
 
-button:focus{
+button:focus {
     outline: none;
 }
 
-button:disabled{
+button:disabled {
     background: #f2f2f2;
 }
 
-input{
+input {
     height: 38px;
     padding: 0px 10px;
     border: 1px solid #ecedec;
@@ -61,90 +61,84 @@ input{
     background: #edf0f1;
 }
 
-input:focus{
+input:focus {
     outline: none;
 }
 
-span{
-    color: rgba(0, 136, 169, 1);
-    font-weight: 700;
-    transition: all 0.3s ease 0s;
-}
-
-span:hover{
+span:hover {
     cursor: pointer;
     color: rgba(0, 136, 169, 0.8);
 }
 
-.logo-form{
+.logo-form {
     margin: 15px;
 }
 
-.login-container{
+.login-container {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 100vh;
 }
 
-.form-login{
+.form-login {
     width: 450px;
     height: 610px;
     border-radius: 10px;
     background-image: linear-gradient(120deg, #3498db, #8e44ad);
 }
 
-.form-login>*{
+.form-login>* {
     margin: 20px;
 }
 
-.register-container{
+.register-container {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 100vh;
 }
 
-.form-register{
+.form-register {
     width: 450px;
     height: 610px;
     border-radius: 10px;
     background-image: linear-gradient(120deg, #3498db, #8e44ad);
 }
 
-.form-register>*{
+.form-register>* {
     margin: 20px;
 }
 
-.form-header h1{
+.form-header h1 {
     font-size: 38px;
     color: #edf0f1;
     text-align: center;
     margin-bottom: 60px;
 }
 
-.form-content>*{
+.form-content>* {
     margin: 20px;
 }
 
-.name-wrapper{
+.name-wrapper {
     display: flex;
     justify-content: space-between;
 }
 
-.name-wrapper>*{
+.name-wrapper>* {
     width: calc(50% - 5px);
 }
 
-.input-wrapper{
+.input-wrapper {
     text-align: center;
 }
 
-.input-wrapper input{
+.input-wrapper input {
     width: 100%;
 }
 
-.message-error{
+.message-error {
     background: #e74c3c;
     color: #edf0f1;
     border-radius: 5px;
@@ -153,7 +147,7 @@ span:hover{
     text-align: center;
 }
 
-.message-sucess{
+.message-sucess {
     background: #27ae60;
     color: #edf0f1;
     border-radius: 5px;
@@ -162,22 +156,150 @@ span:hover{
     text-align: center;
 }
 
-.form-footer{
+.form-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 60px;
 }
 
-.form-footer button{
+.form-footer button {
     width: 63%;
 }
 
-.form-footer>*{
-    margin: 10px    ;
+.form-footer>* {
+    margin: 10px;
 }
 
-.main-nav{
+/* nagivation */
+.nav-contents-right {
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.nav-contents-right img {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Add an active class to highlight the current page */
+.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Hide the link that should open and close the nav-contents-right on small screens */
+.nav-contents-right .icon {
+  display: none;
+}
+
+/* Dropdown container - needed to position the dropdown content */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Style the dropdown button to fit inside the nav-contents-right */
+.dropdown .drop-btn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+/* Style the dropdown content (hidden by default) */
+.drop-down-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(48, 47, 53);
+  /* min-width: 160px; */
+  max-width: calc(38px*3 + 5px);
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-top: 15px;
+  border-radius: 5px;
+  height: calc(38px*7);
+}
+
+.drop-down-content>*{
+    margin: 5px;
+    margin-left: 11px;
+    color: #ecf0f1;
+    font-weight: 700;
+}
+
+/* Style the links inside the dropdown */
+.drop-down-content img {
+  color: black;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+/* Add a grey background to dropdown links on hover */
+.drop-down-content img:hover {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.drop-down-content .user-name{
+    max-width: calc(38px*3 - 10px);
+    word-break: break-word;
+    display: inline-block;
+}
+
+.drop-down-content span:hover{
+    text-decoration: underline;
+}
+
+/* Show the dropdown menu when the user moves the mouse over the dropdown button */
+.dropdown:hover .drop-down-content {
+  display: block;
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the nav-contents-right (.icon) */
+@media screen and (max-width: 600px) {
+  .nav-contents-right a:not(:first-child), .dropdown .drop-btn {
+    display: none;
+  }
+  .nav-contents-right img.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the nav-contents-right with JavaScript when the user clicks on the icon. This class makes the nav-contents-right look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  .nav-contents-right.responsive {position: relative;}
+  .nav-contents-right.responsive img.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .nav-contents-right.responsive img {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .nav-contents-right.responsive .dropdown {float: none;}
+  .nav-contents-right.responsive .drop-down-content {position: relative;}
+  .nav-contents-right.responsive .dropdown .drop-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+/* nagivation */
+
+.main-nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -185,46 +307,83 @@ span:hover{
     margin-right: 50px;
 }
 
-.logo{
+.logo {
     cursor: pointer;
 }
 
-.nav-contents-left>*{
+.nav-contents-left>* {
     margin: 10px;
 }
 
-.nav-contents-right>*{
+.nav-contents-right>* {
     margin: 10px;
 }
 
-.nav-contents-right{
+.nav-contents-right {
     margin-left: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.avatar:hover {
+    cursor: pointer;
+}
+
+.avatar img {
+    height: 38px;
 }
 
 /* management */
-.form-upload>*{    
+
+.form-upload>* {
     margin: 5px 50px;
 }
 
-.form-upload{
+.form-upload {
     display: flex;
     justify-content: flex-start;
 }
 
-.form-upload input{
+.form-upload input {
     height: 22px;
 }
 
-.form-upload button{
-    width: 10%;
+.form-upload button {
+    width: 44px;
     height: 22px;
 }
 
-.form-upload span{
+.form-upload div {
     margin-left: auto;
 }
 
-.file-link{
-    text-decoration: underline;
+.management>* {
+    margin: 5px 50px;
+}
+
+.management h2 {
     color: #2980b9;
+    padding: 0 10px;
+    font-size: 20px;
+}
+
+.list-films {
+    width: 93%;
+    height: 100vh;
+    border: 1px solid #ecf0f1;
+}
+
+.list-films>* {
+    margin: 5px 10px;
+}
+
+.film-content span {
+    color: #ecf0f1;
+    font-size: 16px;
+}
+
+.film-content button {
+    width: 44px;
+    height: 22px;
+    margin-left: 20px;
 }

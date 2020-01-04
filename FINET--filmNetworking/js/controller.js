@@ -44,3 +44,56 @@ controller.login = async function(loginInfo){
         view.enable('login-submit-btn')
     }
 }
+
+function getFileUrl(fileRef){
+    return `https://firebasestorage.googleapis.com/v0/b/${fileRef.bucket}/o/${encodeURIComponent(fileRef.fullpath)}?alt=media`
+}
+
+controller.upload = async function(file){
+    let fileName = file.name
+    let filePath = `upload/${fileName}`
+    let fileRef = firebase.storage().ref().child(filePath)
+    await fileRef.put(file)
+    let fileLink = getFileUrl(fileRef)
+    return fileLink
+}
+
+controller.loadFilms = async function(){
+    // 1. load data form db
+    let admin = 'nguyenvanbapc66@gmail.com'
+
+    let result = await firebase
+        .firestore()
+        .collection('films')
+        .where('admin', '==', admin)
+        .get()
+    console.log(result)
+    let docs = result.docs
+    let films = tranformDocs(docs)
+    
+    // 2. Save data to model
+    model.saveFilms(films)
+    
+    // 3. Display data
+    view.showListFilms()
+}
+
+controller.addFilm = async function(film){
+    
+}   
+
+function tranformDocs(docs){
+    let datas = []
+    for(let doc of docs){
+        let data = doc.data()
+        data.id = doc.id
+        datas.push(data)
+    }
+    return datas
+}
+
+function tranformDoc(doc){
+    let data = doc.data()
+    data.id = doc.id
+    return datas
+}

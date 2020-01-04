@@ -75,25 +75,78 @@ components.login = `
 
 components.nav = `
 <nav class="main-nav">
-<img class="logo" src="./img/logo.png">
-<div class="nav-contents-left">
-    <a href="#">TV Shows</a>
-    <a href="#">Movies</a>
-</div>
-<div class="nav-contents-right">
-    <input type="text" name="search" placeholder="Titles, people, genres">
-    <span id="log-out">Avatar</span>
-</div>
+    <img class="logo" src="./img/logo.png">
+    <div class="nav-contents-left">
+        <a href="#">TV Shows</a>
+        <a href="#">Movies</a>
+    </div>
+    <div id="nav-contents-right" class="nav-contents-right">
+        <input type="text" name="search" placeholder="Titles, people, genres">
+        <div class="avatar dropdown">
+            <img src="./img/man.png">
+            <a class="drop-btn">
+                <i class="fas fa-caret-down"></i>
+            </a>
+            <div class="drop-down-content">
+                <img src="./img/girl (2).png">
+                <img src="./img/girl (3).png">
+                <img src="./img/girl.png">
+                <img src="./img/man.png">
+                <img src="./img/man (1).png">
+                <img src="./img/man (2).png">
+                <img src="./img/man (3).png">
+                <img src="./img/boy(4).png">
+                <i class="user-name" id="user-name"></i>
+                <br>
+                <span id="log-out">Sign out of finet</span>
+            </div>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
 </nav>
 `
 
 components.management = `
-<form class="form-upload" id="form-upload">
-        <input type="file" name="chooser">
-        <button type="submit">Upload</button>
-        <span id="log-out">Avatar</span>
+<form class="form-upload nav-contents-right" id="form-upload">
+    <input type="text" name="genre" placeholder="Genre">
+    <input type="file" name="chooser">
+    <button id="add-link-film" type="submit">
+        <i class="fas fa-plus"></i>
+    </button>
+    <div class="avatar dropdown">
+        <img id="current-avatar" src="./img/man.png">
+        <a class="drop-btn">
+            <i class="fas fa-caret-down"></i>
+        </a>
+        <div id="drop-down-content" class="drop-down-content">
+            <img id="avatar-1" src="./img/girl (2).png">
+            <img id="avatar-2" src="./img/girl (3).png">
+            <img id="avatar-3" src="./img/girl.png">
+            <img id="avatar-4" src="./img/man.png">
+            <img id="avatar-5" src="./img/man (1).png">
+            <img id="avatar-6" src="./img/man (2).png">
+            <img id="avatar-7" src="./img/man (3).png">
+            <img id="avatar-8" src="./img/boy(4).png">
+            <i class="user-name" id="user-name"></i>
+            <br>
+            <span id="log-out">Sign out of finet</span>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
 </form>
-<div id="file-link" class="file-link">
-    <!-- file link will be written here -->
+<div class="management">
+    <h2>List of managed movies</h2>
+    <div id="list-films" class="list-films">
+        <div class="film-content">
+            <img src="#">
+            <span id="file-link"></span>
+            <button type="submit">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="submit">
+                <i class="fas fa-pen-alt"></i>
+            </button>
+        </div>
+    </div>
 </div>
 `
