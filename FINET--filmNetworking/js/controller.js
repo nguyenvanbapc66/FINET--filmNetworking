@@ -54,22 +54,40 @@ controller.upload = async function(file){
     let filePath = `upload/${fileName}`
     let fileRef = firebase.storage().ref().child(filePath)
     await fileRef.put(file)
-    let fileLink = getFileUrl(fileRef)
-    return fileLink
+    // let fileLink = getFileUrl(fileRef)
+    // return fileLink
+    firebase.storage().ref().child(filePath).getDownloadURL().then(function(url) {
+        // `url` is the download URL for 'images/stars.jpg'
+      
+        // This can be downloaded directly:
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function(event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();
+      
+        // Or inserted into an <img> element:
+        var img = document.getElementById('img-film');
+        img.src = url;
+      }).catch(function(err) {
+        alert(err.message)
+      });
 }
 
 controller.loadFilms = async function(){
     // 1. load data form db
-    let admin = 'nguyenvanbapc66@gmail.com'
+    let admin = firebase.auth().currentUser.email
 
     let result = await firebase
         .firestore()
         .collection('films')
         .where('admin', '==', admin)
         .get()
-    console.log(result)
     let docs = result.docs
     let films = tranformDocs(docs)
+    console.log(films)
     
     // 2. Save data to model
     model.saveFilms(films)

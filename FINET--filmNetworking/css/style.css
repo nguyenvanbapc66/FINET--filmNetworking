@@ -336,7 +336,8 @@ span:hover {
 /* management */
 
 .form-upload>* {
-    margin: 5px 50px;
+    margin: 5px;
+    margin-left: 50px;
 }
 
 .form-upload {
@@ -346,6 +347,7 @@ span:hover {
 
 .form-upload input {
     height: 22px;
+    font-weight: 700;
 }
 
 .form-upload button {

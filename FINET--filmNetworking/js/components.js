@@ -108,7 +108,9 @@ components.nav = `
 
 components.management = `
 <form class="form-upload nav-contents-right" id="form-upload">
+    <input type="text" name="nameFilm" placeholder="Movie's name">
     <input type="text" name="genre" placeholder="Genre">
+    <input type="file" name="image">
     <input type="file" name="chooser">
     <button id="add-link-film" type="submit">
         <i class="fas fa-plus"></i>
@@ -138,7 +140,7 @@ components.management = `
     <h2>List of managed movies</h2>
     <div id="list-films" class="list-films">
         <div class="film-content">
-            <img src="#">
+            <img id="img-film" src="#">
             <span id="file-link"></span>
             <button type="submit">
                 <i class="fas fa-minus"></i>

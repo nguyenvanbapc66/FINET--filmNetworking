@@ -149,10 +149,12 @@ view.showComponents = function (name) {
                     let files = form.chooser.files
                     let genre = form.genre.value
                     let file = files[0]
+
                     if (!file) {
                         throw new Error('Please choose a file!')
                     }
                     let link = await controller.upload(file)
+
                     let film = {
                         admin: 'nguyenvanbapc66@gmail.com',
                         genre: genre,
@@ -160,6 +162,7 @@ view.showComponents = function (name) {
                         view: 0
                     }
 
+                    // add film
                     controller.addFilm(film)
                 } catch (err) {
                     alert(err.message)
@@ -193,17 +196,37 @@ view.changeAvatar = function () {
     }
 }
 /* <div class="film-content">
-            <img src="#">
-            <span id="file-link"></span>
-            <button type="submit">
-                <i class="fas fa-minus"></i>
-            </button>
-            <button type="submit">
-                <i class="fas fa-pen-alt"></i>
-            </button>
-        </div> */
-view.showListFilms = function(){
+    <img src="#">
+    <span id="file-link"></span>
+    <button type="submit">
+        <i class="fas fa-minus"></i>
+    </button>
+    <button type="submit">
+        <i class="fas fa-pen-alt"></i>
+    </button>
+</div>  */
+view.showListFilms = function () {
+    if (model.films) {
+        let films = model.films
+        let listFilms = document.getElementById('list-films')
+        // listFilms.innerHTML = ''
 
+        // Show list
+        for (let film of films) {
+            let html = `
+            <div class="film-content">
+                <img src="#">
+                <span id="file-link"></span>
+                <button type="submit">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="submit">
+                    <i class="fas fa-pen-alt"></i>
+                </button>
+            </div> 
+            `
+        }
+    }
 }
 
 view.setText = function (id, text) {
