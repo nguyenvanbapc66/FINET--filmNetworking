@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Finet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app" id="app">
+        <nav class="main-nav">
+            <div class="first-navigation">
+                <div>
+                    <img class="logo" src="FINET--filmNetworking/img/logo.png" 
+                    alt="logo">
+                </div>
+
+                <div class="categories">
+                    <div class="element">
+                        <a href="">TV Shows</a>
+                    </div>
+                    <div class="element">
+                        <a href="">Movies</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="secondary-navigation">
+                <div class="nav-element">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Name, genre, ...">
+
+                    <div class="nav-element" id="account">
+                        <div class="your-profile">
+                            <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.15752-9/50606661_554915751644684_325918967577182208_n.png?_nc_cat=105&_nc_ohc=Fysah070-OgAQm8mByCRKR0NmFs0PcSG8Uj6lkwreqTzgmNdtrhI8iplQ&_nc_ht=scontent-hkg3-1.xx&oh=e08c19411b23f0450d22a0894a46ad35&oe=5EA625CC"
+                                alt="profile" 
+                                class="my-avatar"
+                                id="my-avatar">
+                            <i class="fas fa-ellipsis-h"></i>
+                            <!-- Detail about account -->
+                            <div class="account-sub-menu" 
+                            id="account-sub-menu">
+                                <ul class="sub-menu-avatar">
+                                    <li class="sub-menu-item">
+                                        <span>
+                                            <img class="image-avatar" src="avatar-image/1.png" alt="">
+                                            <img class="image-avatar" src="avatar-image/2.png" alt="">
+                                        </span>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <span>
+                                            <img class="image-avatar" src="avatar-image/3.png" alt="">
+                                            <img class="image-avatar" src="avatar-image/4.png" alt="">
+                                        </span>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <span>
+                                            <img class="image-avatar" src="avatar-image/5.png" alt="">
+                                            <img class="image-avatar" src="avatar-image/6.png" alt="">
+                                        </span>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <span>
+                                            <img class="image-avatar" src="avatar-image/7.png" alt="">
+                                            <img class="image-avatar" src="avatar-image/8.png" alt="">
+                                        </span>
+                                    </li>
+                                </ul>
+                                <ul class="sub-menu-links">
+                                </ul>
+                                <ul class="account-links">
+                                    <li class="sub-menu-item">
+                                        <a href="#">Sign out</a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="#">Contact us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </nav>
+
+        <div class="content">
+            <!-- Content right hereeeeeeeeeeeeeeeeeeeee -->
+            <div class="background-trailer-wrapper">
+                <div class="background-trailer">
+                    <table class="background-trailer-wrapper-table">
+                        <tbody>
+                            <tr>
+                                <td class="background-trailer-table-content">
+                                    <a href="#tenbophim" class="film-name">Tên phim</a>
+                                    <p class="background-trailer-readable">
+                                        <span class="background-trailer-year">Year</span>
+                                        <span class="background-trailer-maturity">Maturity</span>
+                                        <span class="background-trailer-duration">Duration</span>
+                                    </p>
+
+                                    <p class="background-trailer-description">
+                                        Description about this film.
+                                    </p>
+                                    <div class="background-trailer-actions">
+                                        <a href="#" class="action-button">
+                                            <button>Play</button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                    <div class="image-trailer">
+                        <!-- Chỉnh kích thước ảnh background trailer ngay tại class image-trailer -->
+                        <img class="image-trailer-fill"
+                            src="https://www.elleman.vn/wp-content/uploads/2018/03/09/xep-hang-phim-sieu-anh-hung-marvel-elle-man-feature-10.jpg"
+                            alt="">
+                    </div>
+                    <!-- Header trailer -->
+                </div>
+            </div>
+
+
+            <!-- ------------------------ -->
+            <div class="films-list">
+                <h2 class="rowHeader">
+                    <span class="rowTitle">
+                        <div class="row-title-header">
+                            Trending now
+                        </div>
+                    </span>
+                </h2>
+                <div class="rowContainer">
+                    <div class="rowContent slider-hover-trigger-layer">
+                        <div class="slider">
+                            <span class="handle handlePrev" role="button">
+                                <i class="fas fa-angle-left"></i>
+                            </span>
+                            <ul class="pagination-indicator">
+                                <!-- Tùy theo class người dùng chọn  -->
+                                <li class="active"></li>
+                                <li class=""></li>
+                                <li class=""></li>
+                                <li class=""></li>
+                            </ul>
+                            <div class="sliderMask ">
+                                <div class="sliderContent">
+                                    <div class="slider-item">
+                                    </div>
+                                    <div class="slider-item">
+                                    </div>
+                                    <div class="slider-item">
+                                    </div>
+                                    <div class="slider-item-0">
+                                        <div class="title-card-container">
+                                            <div class="slider-refocus title-card">
+                                                <div class="content">
+                                                    <a href="#link-film" class="slider-refocus">
+                                                        <div class="box-container">
+                                                            <img class="box-image"
+                                                            src="film-image/1.jpg" 
+                                                            alt="image-film">
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="slider-item-1">
+                                        <div class="slider-refocus title-card">
+                                            <div class="content">
+                                                <a href="#link-film" class="slider-refocus">
+                                                    <div class="box-container">
+                                                        <img class="box-image"
+                                                        src="film-image/3.jpg" 
+                                                        alt="image-film">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slider-item-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="handle handleNext" role="button">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="footer">
+        <!-- Footer -->
+    </div>
+
+    </div>
+
+    <script src="function.js"></script>
+
+</body>
+
+</html>
