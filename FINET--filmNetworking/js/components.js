@@ -83,40 +83,52 @@ components.nav = `
     <div id="nav-contents-right" class="nav-contents-right">
         <input type="text" name="search" placeholder="Titles, people, genres">
         <div class="avatar dropdown">
-            <img src="./img/man.png">
+            <img id="current-avatar" class="current-avatar" src="./img/man.png">
             <a class="drop-btn">
                 <i class="fas fa-caret-down"></i>
             </a>
-            <div class="drop-down-content">
-                <img src="./img/girl (2).png">
-                <img src="./img/girl (3).png">
-                <img src="./img/girl.png">
-                <img src="./img/man.png">
-                <img src="./img/man (1).png">
-                <img src="./img/man (2).png">
-                <img src="./img/man (3).png">
-                <img src="./img/boy(4).png">
+            <div id="drop-down-content" class="drop-down-content">
+                <img id="avatar-1" src="./img/girl (2).png">
+                <img id="avatar-2" src="./img/girl (3).png">
+                <img id="avatar-3" src="./img/girl.png">
+                <img id="avatar-4" src="./img/man.png">
+                <img id="avatar-5" src="./img/man (1).png">
+                <img id="avatar-6" src="./img/man (2).png">
+                <img id="avatar-7" src="./img/man (3).png">
+                <img id="avatar-8" src="./img/boy(4).png">
                 <i class="user-name" id="user-name"></i>
                 <br>
                 <span id="log-out">Sign out of finet</span>
             </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
         </div>
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
     </div>
 </nav>
 `
 
+components.film = `
+
+`
+
 components.management = `
 <form class="form-upload nav-contents-right" id="form-upload">
-    <input type="text" name="nameFilm" placeholder="Movie's name">
-    <input type="text" name="genre" placeholder="Genre">
-    <input type="file" name="image">
-    <input type="file" name="chooser">
+    <span>
+        <input id="name-film" type="text" name="nameFilm" placeholder="Movie's name">
+        <div id="name-film-error" class="message-error"></div>
+    </span>
+    <span>
+        <input id="genre" type="text" name="genre" placeholder="Genre">
+        <div id="genre-error" class="message-error"></div>
+    </span>
+    <span>
+        <input type="file" name="chooser">
+        <div id="file-error" class="message-error"></div>
+    </span>
     <button id="add-link-film" type="submit">
         <i class="fas fa-plus"></i>
     </button>
     <div class="avatar dropdown">
-        <img id="current-avatar" src="./img/man.png">
+        <img id="current-avatar" class="current-avatar" src="./img/man.png">
         <a class="drop-btn">
             <i class="fas fa-caret-down"></i>
         </a>
@@ -138,17 +150,7 @@ components.management = `
 </form>
 <div class="management">
     <h2>List of managed movies</h2>
-    <div id="list-films" class="list-films">
-        <div class="film-content">
-            <img id="img-film" src="#">
-            <span id="file-link"></span>
-            <button type="submit">
-                <i class="fas fa-minus"></i>
-            </button>
-            <button type="submit">
-                <i class="fas fa-pen-alt"></i>
-            </button>
-        </div>
+    <div id="list-films" class="list-films"></div>
     </div>
 </div>
 `

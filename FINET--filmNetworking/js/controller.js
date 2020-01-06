@@ -45,37 +45,6 @@ controller.login = async function(loginInfo){
     }
 }
 
-function getFileUrl(fileRef){
-    return `https://firebasestorage.googleapis.com/v0/b/${fileRef.bucket}/o/${encodeURIComponent(fileRef.fullpath)}?alt=media`
-}
-
-controller.upload = async function(file){
-    let fileName = file.name
-    let filePath = `upload/${fileName}`
-    let fileRef = firebase.storage().ref().child(filePath)
-    await fileRef.put(file)
-    // let fileLink = getFileUrl(fileRef)
-    // return fileLink
-    firebase.storage().ref().child(filePath).getDownloadURL().then(function(url) {
-        // `url` is the download URL for 'images/stars.jpg'
-      
-        // This can be downloaded directly:
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = function(event) {
-          var blob = xhr.response;
-        };
-        xhr.open('GET', url);
-        xhr.send();
-      
-        // Or inserted into an <img> element:
-        var img = document.getElementById('img-film');
-        img.src = url;
-      }).catch(function(err) {
-        alert(err.message)
-      });
-}
-
 controller.loadFilms = async function(){
     // 1. load data form db
     let admin = firebase.auth().currentUser.email
@@ -87,7 +56,6 @@ controller.loadFilms = async function(){
         .get()
     let docs = result.docs
     let films = tranformDocs(docs)
-    console.log(films)
     
     // 2. Save data to model
     model.saveFilms(films)
@@ -96,9 +64,89 @@ controller.loadFilms = async function(){
     view.showListFilms()
 }
 
+controller.setupDatabaseChange = function(){
+    let admin = firebase.auth().currentUser.email
+    let isFirstRun = true
+
+    firebase
+        .firestore()
+        .collection('films')
+        .where('admin', '==', admin)
+        .onSnapshot(function(snapshot){
+            if(isFirstRun){
+                isFirstRun = false
+                return
+            }
+            let docChanges = snapshot.docChanges()
+            for(let docChange of docChanges){
+                if(docChange.type == 'added'){
+                    let film = tranformDoc(docChange.doc)
+
+                    model.updateFilm(film)
+                    view.showListFilms()
+                }
+                if(docChange.type == 'removed'){
+                    // update model
+                    // update view
+                    let film = tranformDoc(docChange.doc)
+
+                    model.removeFilm(film)
+                    view.showListFilms()
+                }
+            }
+        })
+}
+
 controller.addFilm = async function(film){
-    
-}   
+    view.disable('add-link-film')
+
+    await firebase
+        .firestore()
+        .collection('films')
+        .add(film)
+
+    document.getElementById('name-film').value = ''
+    document.getElementById('genre').value = ''
+
+    view.enable('add-link-film')
+}  
+
+controller.removeFilm = async function(){
+    if(model.films){
+        let films = model.films
+        for(let film of films){
+            let idFilm = film.id
+
+            await firebase
+                .firestore()
+                .collection('films')
+                .doc(idFilm)
+                .delete()
+        }
+    }
+}
+
+controller.editFilm = async function(){
+    if(model.films){
+        view.editFilm()
+
+        let films = model.films
+        console.log(films)
+    }
+}
+
+controller.upload = async function(file){
+    let fileName = file.name
+    let filePath = `upload/${fileName}`
+    let fileRef = firebase.storage().ref().child(filePath)
+    await fileRef.put(file)
+    let fileLink = getFileUrl(fileRef)
+    return fileLink
+}
+
+function getFileUrl(fileRef){
+    return `https://firebasestorage.googleapis.com/v0/b/${fileRef.bucket}/o/${encodeURIComponent(fileRef.fullpath)}?alt=media`
+}
 
 function tranformDocs(docs){
     let datas = []
@@ -113,5 +161,5 @@ function tranformDocs(docs){
 function tranformDoc(doc){
     let data = doc.data()
     data.id = doc.id
-    return datas
+    return data
 }

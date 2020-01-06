@@ -116,7 +116,7 @@ view.showComponents = function (name) {
         }
         case 'film': {
             let app = document.getElementById('app')
-            app.innerHTML = components.nav
+            app.innerHTML = components.nav + components.film
 
             let logOut = document.getElementById('log-out')
             logOut.onclick = logOutClickHandler
@@ -128,6 +128,8 @@ view.showComponents = function (name) {
 
             view.setText('user-name', firebase.auth().currentUser.displayName)
 
+            view.changeAvatar()
+
             break
         }
         case 'management': {
@@ -135,37 +137,48 @@ view.showComponents = function (name) {
             app.innerHTML = components.management
 
             controller.loadFilms()
+            controller.setupDatabaseChange()
 
             let logOut = document.getElementById('log-out')
             logOut.onclick = logOutClickHandler
 
             let form = document.getElementById('form-upload')
-            form.onsubmit = uploadLinkSubmitHandler
+            form.onsubmit = addFilmSubmitHandler
 
-            async function uploadLinkSubmitHandler(e) {
+            async function addFilmSubmitHandler(e) {
                 e.preventDefault()
 
-                try {
-                    let files = form.chooser.files
-                    let genre = form.genre.value
-                    let file = files[0]
+                let files = form.chooser.files
+                let file = files[0]
 
+                try {
                     if (!file) {
                         throw new Error('Please choose a file!')
                     }
-                    let link = await controller.upload(file)
-
-                    let film = {
-                        admin: 'nguyenvanbapc66@gmail.com',
-                        genre: genre,
-                        link: link,
-                        view: 0
-                    }
-
-                    // add film
-                    controller.addFilm(film)
                 } catch (err) {
-                    alert(err.message)
+                    view.setText('file-error', err.message)
+                }
+
+                // event submit >> add film
+                let nameFilm = form.nameFilm.value.trim()
+                let genre = form.genre.value.trim()
+                let link = await controller.upload(file)
+
+                let validateResult = [
+                    view.validate(nameFilm, 'name-film-error', "Please enter the movie's name"),
+                    view.validate(genre, 'genre-error', 'Please enter the genre')
+                ]
+
+                let film = {
+                    admin: 'nguyenvanbapc66@gmail.com',
+                    name: nameFilm,
+                    genre: genre,
+                    link: link,
+                    view: 0
+                }
+
+                if (allPassed(validateResult)) {
+                    controller.addFilm(film)
                 }
             }
 
@@ -195,42 +208,71 @@ view.changeAvatar = function () {
         }
     }
 }
-/* <div class="film-content">
-    <img src="#">
-    <span id="file-link"></span>
-    <button type="submit">
-        <i class="fas fa-minus"></i>
-    </button>
-    <button type="submit">
-        <i class="fas fa-pen-alt"></i>
-    </button>
-</div>  */
-view.showListFilms = function () {
+
+
+view.showListFilms = async function () {
     if (model.films) {
         let films = model.films
+
         let listFilms = document.getElementById('list-films')
-        // listFilms.innerHTML = ''
+        listFilms.innerHTML = ''
 
         // Show list
         for (let film of films) {
+            // let id = film.id
+
+            // await firebase
+            //     .storage()
+            //     .ref()
+            //     .child(`${}`)
+
             let html = `
             <div class="film-content">
                 <img src="#">
-                <span id="file-link"></span>
-                <button type="submit">
+                <span>
+                    ${film.link}:
+                    ${film.name},
+                    ${film.genre}
+                </span>
+                <button id="${film.id}" type="submit">
                     <i class="fas fa-minus"></i>
                 </button>
-                <button type="submit">
+                <button id="edit-film-${film.id}" type="submit">
                     <i class="fas fa-pen-alt"></i>
                 </button>
             </div> 
             `
+            listFilms.innerHTML += html
         }
+        // Remove film click handler
+        for (let film of films) {
+            let removeFilmBtn = document.getElementById(`${film.id}`)
+            let editFilmBtn = document.getElementById(`edit-film-${film.id}`)
+
+            removeFilmBtn.addEventListener('click', removeFilmClickHandler)
+
+            editFilmBtn.addEventListener('click', editFilmClickHandler)
+
+            function removeFilmClickHandler() {
+                console.log('removed')
+                controller.removeFilm()
+            }
+
+            function editFilmClickHandler() {
+                console.log('edited')
+                controller.editFilm()
+            }
+        }
+
     }
 }
 
+view.editFilm = function () {
+
+}
+
 view.setText = function (id, text) {
-    document.getElementById(id).innerHTML = text
+    document.getElementById(id).innerText = text
 }
 
 view.validate = function (condition, idErrorTag, messageError) {
