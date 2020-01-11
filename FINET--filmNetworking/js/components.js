@@ -154,3 +154,26 @@ components.management = `
     </div>
 </div>
 `
+
+components.editModal = `
+    <form id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="info-edit">
+            <input type="hidden" id="id-film-edit" value="">
+
+            <span>
+                <input id="name-film-edit" type="text" placeholder="Movie's name">
+                <div id="name-film-edit-error" class="message-error"></div>
+            </span>
+            <span>
+                <input id="genre-film-edit" type="text" placeholder="Genre">
+                <div id="genre-film-edit-error" class="message-error"></div>
+            </span>
+        </div>                        
+        <button id="edit-info-btn" class="close" type="submit">
+            <i class="fas fa-share"></i>
+        </button>
+    </div>
+    </form>
+`

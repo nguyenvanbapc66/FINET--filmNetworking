@@ -134,7 +134,7 @@ view.showComponents = function (name) {
         }
         case 'management': {
             let app = document.getElementById('app')
-            app.innerHTML = components.management
+            app.innerHTML = components.management + components.editModal
 
             controller.loadFilms()
             controller.setupDatabaseChange()
@@ -174,6 +174,7 @@ view.showComponents = function (name) {
                     name: nameFilm,
                     genre: genre,
                     link: link,
+                    nameLink: file.name,
                     view: 0
                 }
 
@@ -210,65 +211,141 @@ view.changeAvatar = function () {
 }
 
 
-view.showListFilms = async function () {
-    if (model.films) {
+// view.showListFilms = async function () {
+//             // When the user clicks on <span> (x), close the modal
+//             span.onclick = function (e) {
+//                 e.preventDefault()
+                // let validateNameFilm = true
+                // let validateGenreFilm = true
+
+                // if(nameFilmEdit.value == film.name){
+                //     view.setText('name-film-edit-error', "You must change the movie's name")
+                //     validateNameFilm = false
+                // } else{
+                //     view.setText('name-film-edit-error', "")
+                //     validateNameFilm = true
+                // }
+
+                // if(genreFilmEdit.value == film.genre){
+                //     view.setText('genre-film-edit-error', "You must change genre of the film")
+                //     validateGenreFilm = false
+                // } else{
+                //     view.setText('genre-film-edit-error', "")
+                //     validateGenreFilm = true
+                // }
+                
+                // if(validateNameFilm == true || validateGenreFilm == true){
+                //     controller.editFilm(film, nameFilmEdit, genreFilmEdit)
+                //     modal.style.display = "none"
+                // }
+//             }
+
+//             // When the user clicks anywhere outside of the modal, close it
+//             window.onclick = function (event) {
+//                 if (event.target == modal) {
+//                     modal.style.display = "none"
+//                 }
+//             }
+//         }
+//     }
+// }
+
+view.showListFilms = async function(){
+    if(model.films){
         let films = model.films
+        let modal = document.getElementById("myModal")
 
         let listFilms = document.getElementById('list-films')
         listFilms.innerHTML = ''
 
         // Show list
         for (let film of films) {
-            // let id = film.id
-
-            // await firebase
-            //     .storage()
-            //     .ref()
-            //     .child(`${}`)
-
+            let nameLink = film.nameLink
+            let url = await firebase.storage().ref(`upload/${nameLink}`).getDownloadURL()
             let html = `
             <div class="film-content">
-                <img src="#">
                 <span>
-                    ${film.link}:
-                    ${film.name},
-                    ${film.genre}
+                    <video width="400" controls>
+                        <source src="${url}" type="video/mp4">
+                    </video>:
+                    <span id="info-film-${film.id}">
+                        ${film.name},
+                        ${film.genre}
+                    </span>                        
                 </span>
-                <button id="${film.id}" type="submit">
+                <button id="delete-film-${film.id}" type="button">
                     <i class="fas fa-minus"></i>
                 </button>
-                <button id="edit-film-${film.id}" type="submit">
+                <button id="edit-film-${film.id}" type="button">
                     <i class="fas fa-pen-alt"></i>
                 </button>
-            </div> 
+            </div>
             `
             listFilms.innerHTML += html
         }
-        // Remove film click handler
-        for (let film of films) {
-            let removeFilmBtn = document.getElementById(`${film.id}`)
-            let editFilmBtn = document.getElementById(`edit-film-${film.id}`)
 
-            removeFilmBtn.addEventListener('click', removeFilmClickHandler)
+        // Bind event to buttons
+        for(let film of films){
+            // Bind event to delete button
+            let deleteBtn = document.getElementById('delete-film-' + film.id)
+            deleteBtn.onclick = deleteBtnClickHandler
 
-            editFilmBtn.addEventListener('click', editFilmClickHandler)
-
-            function removeFilmClickHandler() {
-                console.log('removed')
-                controller.removeFilm()
+            function deleteBtnClickHandler(){
+                controller.removeFilm(film)
             }
+            
+            // Bind event to edit button
+            let editBtn = document.getElementById('edit-film-' + film.id)
+            editBtn.onclick = editBtnClickHandler
 
-            function editFilmClickHandler() {
-                console.log('edited')
-                controller.editFilm()
+            function editBtnClickHandler(){
+                // Get modal
+                modal.style.display = 'block'
+
+                // Init modal data
+                document.getElementById('id-film-edit').value = film.id
+
+                document.getElementById('name-film-edit').value = film.name
+                document.getElementById('genre-film-edit').value = film.genre 
             }
         }
 
+        // event edit film
+        let editInfoBtn = document.getElementById('edit-info-btn')
+        editInfoBtn.onclick = editInfoClickHandler
+
+        function editInfoClickHandler(e){
+            e.preventDefault()
+
+            let nameFilmEdit = document.getElementById('name-film-edit').value
+            let genreFilmEdit = document.getElementById('genre-film-edit').value
+            let idFilm = document.getElementById('id-film-edit').value
+
+            controller.editFilm(idFilm, nameFilmEdit, genreFilmEdit)
+        }
+
+        // Close modal
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none"
+            }
+        }
     }
 }
 
-view.editFilm = function () {
+view.showCurrentFilm = function(){
+    if(model.currentFilm){
+        let name = model.currentFilm.name
+        let genre = model.currentFilm.genre
+        let infoFilm = document.getElementById('info-film-' + model.currentFilm.id)
+        infoFilm.innerHTML = ''
 
+        let html = `
+                ${name},
+                ${genre}
+        `
+        infoFilm.innerHTML = html
+    }
 }
 
 view.setText = function (id, text) {

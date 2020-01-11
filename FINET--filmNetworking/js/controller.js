@@ -79,6 +79,14 @@ controller.setupDatabaseChange = function(){
             }
             let docChanges = snapshot.docChanges()
             for(let docChange of docChanges){
+                if(docChange.type == 'modified'){
+                    let doc = docChange.doc
+                    let film = tranformDoc(doc)                
+                    
+                    model.saveCurrentFilm(film)
+                    view.showCurrentFilm()
+                    model.updateFilm(film)
+                }
                 if(docChange.type == 'added'){
                     let film = tranformDoc(docChange.doc)
 
@@ -111,28 +119,28 @@ controller.addFilm = async function(film){
     view.enable('add-link-film')
 }  
 
-controller.removeFilm = async function(){
-    if(model.films){
-        let films = model.films
-        for(let film of films){
-            let idFilm = film.id
-
-            await firebase
-                .firestore()
-                .collection('films')
-                .doc(idFilm)
-                .delete()
-        }
-    }
+controller.removeFilm = async function(film){
+    await firebase
+        .firestore()
+        .collection('films')
+        .doc(film.id)
+        .delete()
 }
 
-controller.editFilm = async function(){
-    if(model.films){
-        view.editFilm()
+controller.editFilm = async function(idFilm, nameFilmEdit, genreFilmEdit){
+    document.getElementById('myModal').style.display = 'none'
+    view.disable('edit-info-btn')
 
-        let films = model.films
-        console.log(films)
-    }
+    await firebase
+        .firestore()
+        .collection('films')
+        .doc(idFilm)
+        .update({
+            name: nameFilmEdit,
+            genre: genreFilmEdit
+        })
+
+    view.enable('edit-info-btn')
 }
 
 controller.upload = async function(file){

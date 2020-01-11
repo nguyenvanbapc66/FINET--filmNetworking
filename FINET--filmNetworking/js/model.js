@@ -9,6 +9,7 @@ model.saveFilms = function(films){
 
 model.saveCurrentFilm = function(film){
     model.currentFilm = film
+    
 }
 
 model.updateFilm = function(film){
