@@ -12,7 +12,7 @@ body {
     min-height: 100vh;
 }
 
-img {
+.logo {
     height: 50px;
     background-size: cover;
 }
@@ -198,13 +198,13 @@ span:hover {
 }
 
 /* Dropdown container - needed to position the dropdown content */
-.dropdown {
+.drop-down {
   float: left;
   overflow: hidden;
 }
 
 /* Style the dropdown button to fit inside the nav-contents-right */
-.dropdown .drop-btn {
+.drop-down .drop-btn {
   font-size: 17px;
   border: none;
   outline: none;
@@ -262,13 +262,13 @@ span:hover {
 }
 
 /* Show the dropdown menu when the user moves the mouse over the dropdown button */
-.dropdown:hover .drop-down-content {
+.drop-down:hover .drop-down-content {
   display: block;
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the nav-contents-right (.icon) */
 @media screen and (max-width: 600px) {
-  .nav-contents-right a:not(:first-child), .dropdown .drop-btn {
+  .nav-contents-right a:not(:first-child), .drop-down .drop-btn {
     display: none;
   }
   .nav-contents-right img.icon {
@@ -290,9 +290,9 @@ span:hover {
     display: block;
     text-align: left;
   }
-  .nav-contents-right.responsive .dropdown {float: none;}
+  .nav-contents-right.responsive .drop-down {float: none;}
   .nav-contents-right.responsive .drop-down-content {position: relative;}
-  .nav-contents-right.responsive .dropdown .drop-btn {
+  .nav-contents-right.responsive .drop-down .drop-btn {
     display: block;
     width: 100%;
     text-align: left;
@@ -447,3 +447,139 @@ span:hover {
     text-decoration: none;
     cursor: pointer;
   }
+
+
+
+
+  /* ---------------------------------------------------------------------------------*/
+
+  
+/* Background trailer */
+
+.content{
+    /* overflow: hidden; */
+    margin-top: 0px;
+    width: 100%;
+
+}
+
+.background-trailer-wrapper{
+    width: 100%;
+    padding-top: 35%;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #000;
+
+}
+
+.background-trailer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.background-trailer-wrapper-table {
+    margin-left: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+.background-trailer-table-content {
+    color: white;
+}
+
+
+.image-trailer {
+    width: 75%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+   
+}
+
+.image-trailer-fill {
+    width: 100%;
+    right: 30px;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 0;
+    /* opacity: 30%;  test*/ 
+}
+
+.background-trailer-description, .background-trailer-actions {
+    padding-top: 10px;
+}
+
+.action-button > button {
+    max-width: max-content !important;
+    border-radius: 5px;
+    text-align: center;
+    padding: 0px 15px;
+
+}
+
+/* Films */
+
+.rowHeader {
+    margin-left: 30px;
+    color: white;
+}
+
+.row-title-header {
+    /* color: white; */
+}
+
+.films-list{
+    margin-top: 30px;
+}
+
+.film-content {
+    margin: 10px 30px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.film-container-row  {
+    position: relative;
+}
+
+.carousel-item{
+    height: fit-content;
+}
+
+.carousel-inner {
+    display: flex;
+}
+
+.film-element {
+    margin-top: 20px;
+}
+
+.row-container {
+    display: flex;
+    width: 20%;
+}
+
+
+/* Image Film */
+
+.active{
+    background: #24252A ;
+}
+
+
+.d-block {
+    margin: 10px;
+    transition: all 0.3s ease 0s;
+}
+
+.d-block:hover {
+    transform: scale(1.5);
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5); 
+}

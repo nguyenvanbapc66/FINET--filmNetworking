@@ -130,7 +130,7 @@ view.showComponents = function (name) {
 
             view.changeAvatar()
 
-            break
+            break;
         }
         case 'management': {
             let app = document.getElementById('app')
