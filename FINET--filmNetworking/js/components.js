@@ -75,13 +75,15 @@ components.login = `
 
 components.nav = `
 <nav class="main-nav">
+<a href="./index.html">
     <img class="logo" src="./img/logo.png">
+</a>
     <div class="nav-contents-left">
-        <a href="#">TV Shows</a>
-        <a href="#">Movies</a>
+        <a href="#TvShows">TV Shows</a>
+        <a href="#Movies">Movies</a>
     </div>
     <div id="nav-contents-right" class="nav-contents-right">
-        <input type="text" name="search" placeholder="Titles, people, genres">
+        <input id="inputSearch" type="text" name="search" placeholder="Titles, people, genres">
         <div class="avatar drop-down">
             <img id="current-avatar" class="current-avatar" src="./img/man.png">
             <a class="drop-btn">
@@ -98,7 +100,7 @@ components.nav = `
                 <img id="avatar-8" src="./img/boy(4).png">
                 <i class="user-name" id="user-name"></i>
                 <br>
-                <span id="log-out">Sign out of finet</span>
+                <span id="log-out">Sign Out</span>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
         </div>
@@ -107,7 +109,7 @@ components.nav = `
 `
 
 components.film = `
-<div class="content">
+<div class="content" id="content">
 <!-- Content right hereeeeeeeeeeeeeeeeeeeee -->
 <div class="background-trailer-wrapper">
     <div class="background-trailer">
@@ -118,8 +120,6 @@ components.film = `
                         <a href="#tenbophim" class="film-name" id="film-name">Name</a>
                         <p class="background-trailer-readable">
                             <span class="background-trailer-year" id="background-trailer-year">Year</span>
-                            <span class="background-trailer-maturity" id="background-trailer-maturity">Maturity</span>
-                            <span class="background-trailer-duration" id="background-trailer-duration">Duration</span>
                         </p>
 
                         <p class="background-trailer-description" id="background-trailer-description">
@@ -674,16 +674,17 @@ components.film = `
                     </button>
                 </div>
                 <div class="modal-body" style="color: black !important;">
-                    <div class="trailer" id="video">
+                    <div class="trailer" >
                         <h2>Video</h2>
-                        <video src="../FINET--filmNetworking/"></video>
+                        <span id="video"></span>
                     </div>
                     <div class="film-detail" id="type-of-film">
                         <h2>Film Detail:</h2>
                         Humorous, Action , Fiction
                     </div>
-                    <div class="film-description" id="description">
+                    <div class="film-description" >
                         <h2>Film Description:</h2>
+                        <span id="description">
                         Avengers: Endgame is a 2019 American superhero film based on the Marvel Comics
                         superhero team the Avengers, produced by Marvel Studios and distributed by Walt
                         Disney Studios Motion Pictures.
@@ -697,6 +698,7 @@ components.film = `
                         Favreau, Bradley Cooper, Gwyneth Paltrow, and Josh Brolin.
                         In the film, the surviving members of the Avengers and their allies attempt to
                         reverse the damage caused by Thanos in Infinity War.
+                        </span>
                     </div>
                 </div>
             </div>

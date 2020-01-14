@@ -48,21 +48,66 @@ controller.login = async function(loginInfo){
 
 // About films
 controller.showInformationOfChosenFilm = function (e) {
-    console.log('run to here.')
-    console.log(e.target.id)
     let currentID = e.target.id;
+    document.getElementById('video').innerHTML =``;
     for (const film of model.films) {
-        if(currentID === film.id) {
-            // document.getElementById('type-of-film').innerText = 'Film Detail: ' + film.genre;
+        if (currentID === film.id) {
             document.getElementById('description').innerText = 'Film Description:\n' + film.description;
+            document.getElementById('video').innerHTML = `
+            <video controls style=""width="100%">
+            <source src="${film.link}" type="video/mp4">
+            </video>
+            `
             document.getElementById('btn-show-box').click();
         }
-        
+
     }
+
 
 }
 
 
+controller.search = function (e) {
+    if (e.keyCode == 13) {
+        let inputValue = document.getElementById('inputSearch').value;
+        let result = [];
+        let html = ``;
+        console.log(result)
+        if (inputValue.indexOf(" ") !== -1
+            || inputValue.trim() === null
+            || inputValue.trim() === undefined
+            || inputValue.trim() === " "
+            || inputValue === ""
+        ) {
+            alert('Enter value!');
+        } else {
+            for (const film of model.films) {
+                if (film.name.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) {
+                    result.push(film)
+                } else if (film.genre.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) {
+                    result.push(film)
+                }
+
+            }
+
+            for (const element of result) {
+                html += `
+            <span style="display:flex">
+                <video width="400px" height="200px" controls class="video-display">
+                     <source src="${element.link}" type="video/mp4">
+                </video>
+                <img src ="${element.image}" width="400px" height="200px" class="video-display">
+            </span>
+                `
+            };
+            console.log(result)
+            document.getElementById('content').innerHTML = html;
+        };
+
+    }
+
+
+}
 
 controller.loadFilmsHomePage = async function(){
     // 1. load data form db

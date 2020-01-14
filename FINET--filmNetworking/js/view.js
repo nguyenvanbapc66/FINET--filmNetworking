@@ -134,6 +134,9 @@ view.showComponents = async function (name) {
                 // Show list in homepage
                 view.showSummaryAboutTheRandomFilm();
 
+                view.setText('user-name', firebase.auth().currentUser.email)
+
+                view.changeAvatar();
 
                 let logOut = document.getElementById('log-out')
                 logOut.onclick = logOutClickHandler
@@ -143,10 +146,9 @@ view.showComponents = async function (name) {
                     view.showComponents('login')
                 }
 
-                view.setText('user-name', firebase.auth().currentUser.email)
-
-                view.changeAvatar();
-
+                let btnSearch = document.getElementById('inputSearch');
+                btnSearch.onkeypress = controller.search;
+                
                 break;
             }
             catch (error) {
