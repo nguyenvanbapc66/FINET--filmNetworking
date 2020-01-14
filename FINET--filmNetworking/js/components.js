@@ -3,7 +3,7 @@ const components = {}
 
 components.register = `
 <div class="logo-form">
-<img src="./img/logo.png">
+<img class="logo" src="./img/logo.png">
 </div>
 <section class="register-container">
 <form id="form-register" class="form-register">
@@ -38,7 +38,7 @@ components.register = `
     </div>
     <div class="form-footer">
         <div></div>
-        <button class="btn" id="register-submit-btn" type="submit">Register</button>
+        <button id="register-submit-btn" type="submit">Register</button>
         <a id="register-link" href="#">Already have account? Login now</a>
     </div>
 </form>
@@ -47,7 +47,7 @@ components.register = `
 
 components.login = `
 <div class="logo-form">
-<img src="./img/logo.png">
+<img class="logo" src="./img/logo.png">
 </div>
 <section class="login-container">
 <form id="form-login" class="form-login">
@@ -66,13 +66,8 @@ components.login = `
         <div id="login-error" class="message-error"></div>
     </div>
     <div class="form-footer">
-        <button class="btn" id="login-submit-btn" type="submit">Login</button>
+        <button id="login-submit-btn" type="submit">Login</button>
         <a id="login-link" href="#">New to Finet? Register now</a>
-        <div class="preview-film">
-            <h2>Preview as guest</h2>
-            <span>No time to register right now? No problem. You can register later, let's preview.</span>
-            <button>Preview as guest</button>
-        </div>
     </div>
 </form>
 </section>
