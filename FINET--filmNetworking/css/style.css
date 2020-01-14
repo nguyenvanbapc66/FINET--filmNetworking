@@ -70,6 +70,16 @@ span:hover {
     color: rgba(0, 136, 169, 0.8);
 }
 
+textarea{
+    width: 280px;
+    height: 250px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 5px;
+    outline: none;
+    font-weight: 700;
+}
+
 .logo-form {
     margin: 15px;
 }
@@ -163,12 +173,28 @@ span:hover {
     margin-top: 60px;
 }
 
+.form-footer>* {
+    margin: 10px;
+}
+
 .form-footer button {
     width: 63%;
 }
 
-.form-footer>* {
-    margin: 10px;
+.preview-film h2{
+    color: #95a5a6;
+    margin-bottom: 20px;
+}
+
+.preview-film span{
+    color: #ecf0f1;
+}
+
+.preview-film button{
+    float: right;
+    margin-right: 15px;
+    width: 35%;
+    background: #e67e22;
 }
 
 /* nagivation */
@@ -359,6 +385,16 @@ span:hover {
     margin-left: auto;
 }
 
+/* .form-upload .description{
+    width: 270px;
+    height: 250px;
+    bor
+} */
+
+.input-wrapper span{
+    margin-bottom: 20px;
+}
+
 .management>* {
     margin: 5px 50px;
 }
@@ -388,6 +424,10 @@ span:hover {
     width: 44px;
     height: 22px;
     margin-left: 20px;
+}
+
+.film-content .info-film{
+    color: #2980b9;
 }
 
 /* style of modal */

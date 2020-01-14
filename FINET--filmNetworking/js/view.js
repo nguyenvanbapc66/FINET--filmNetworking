@@ -150,9 +150,11 @@ view.showComponents = function (name) {
 
                 let files = form.chooser.files
                 let file = files[0]
+                let filmImages = form.image.files
+                let filmImage = filmImages[0]
 
                 try {
-                    if (!file) {
+                    if (!file || !filmImage) {
                         throw new Error('Please choose a file!')
                     }
                 } catch (err) {
@@ -162,11 +164,14 @@ view.showComponents = function (name) {
                 // event submit >> add film
                 let nameFilm = form.nameFilm.value.trim()
                 let genre = form.genre.value.trim()
+                let description = form.description.value.trim()
                 let link = await controller.upload(file)
+                let image = await controller.upload(filmImage)
 
                 let validateResult = [
                     view.validate(nameFilm, 'name-film-error', "Please enter the movie's name"),
-                    view.validate(genre, 'genre-error', 'Please enter the genre')
+                    view.validate(genre, 'genre-error', 'Please enter the genre'),
+                    view.validate(description, 'description-error', 'Please enter the description')
                 ]
 
                 let film = {
@@ -175,7 +180,8 @@ view.showComponents = function (name) {
                     genre: genre,
                     link: link,
                     nameLink: file.name,
-                    view: 0
+                    image: image,
+                    description: description
                 }
 
                 if (allPassed(validateResult)) {
@@ -210,46 +216,6 @@ view.changeAvatar = function () {
     }
 }
 
-
-// view.showListFilms = async function () {
-//             // When the user clicks on <span> (x), close the modal
-//             span.onclick = function (e) {
-//                 e.preventDefault()
-                // let validateNameFilm = true
-                // let validateGenreFilm = true
-
-                // if(nameFilmEdit.value == film.name){
-                //     view.setText('name-film-edit-error', "You must change the movie's name")
-                //     validateNameFilm = false
-                // } else{
-                //     view.setText('name-film-edit-error', "")
-                //     validateNameFilm = true
-                // }
-
-                // if(genreFilmEdit.value == film.genre){
-                //     view.setText('genre-film-edit-error', "You must change genre of the film")
-                //     validateGenreFilm = false
-                // } else{
-                //     view.setText('genre-film-edit-error', "")
-                //     validateGenreFilm = true
-                // }
-                
-                // if(validateNameFilm == true || validateGenreFilm == true){
-                //     controller.editFilm(film, nameFilmEdit, genreFilmEdit)
-                //     modal.style.display = "none"
-                // }
-//             }
-
-//             // When the user clicks anywhere outside of the modal, close it
-//             window.onclick = function (event) {
-//                 if (event.target == modal) {
-//                     modal.style.display = "none"
-//                 }
-//             }
-//         }
-//     }
-// }
-
 view.showListFilms = async function(){
     if(model.films){
         let films = model.films
@@ -260,18 +226,20 @@ view.showListFilms = async function(){
 
         // Show list
         for (let film of films) {
-            let nameLink = film.nameLink
-            let url = await firebase.storage().ref(`upload/${nameLink}`).getDownloadURL()
             let html = `
             <div class="film-content">
                 <span>
+                    <span class="info-film">Link film:</span>
                     <video width="400" controls>
-                        <source src="${url}" type="video/mp4">
-                    </video>:
-                    <span id="info-film-${film.id}">
+                        <source src="${film.link}" type="video/mp4">
+                    </video>,
+                    <span class="info-film">link image:</span>
+                    <img src="${film.image}">,
+                    <span id="info-film-${film.id}" class="info-film">
                         ${film.name},
                         ${film.genre}
-                    </span>                        
+                    </span>,
+                    <span>${film.description}</span>                       
                 </span>
                 <button id="delete-film-${film.id}" type="button">
                     <i class="fas fa-minus"></i>

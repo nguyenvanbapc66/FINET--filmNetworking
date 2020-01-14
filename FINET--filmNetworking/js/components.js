@@ -68,6 +68,11 @@ components.login = `
     <div class="form-footer">
         <button id="login-submit-btn" type="submit">Login</button>
         <a id="login-link" href="#">New to Finet? Register now</a>
+        <div class="preview-film">
+            <h2>Preview as guest</h2>
+            <span>No time to register right now? No problem. You can register later, let's preview.</span>
+            <button>Preview as guest</button>
+        </div>
     </div>
 </form>
 </section>
@@ -112,18 +117,28 @@ components.film = `
 
 components.management = `
 <form class="form-upload nav-contents-right" id="form-upload">
-    <span>
-        <input id="name-film" type="text" name="nameFilm" placeholder="Movie's name">
-        <div id="name-film-error" class="message-error"></div>
-    </span>
-    <span>
-        <input id="genre" type="text" name="genre" placeholder="Genre">
-        <div id="genre-error" class="message-error"></div>
-    </span>
-    <span>
-        <input type="file" name="chooser">
-        <div id="file-error" class="message-error"></div>
-    </span>
+    <div class="input-wrapper">
+        <span>
+            <input id="name-film" type="text" name="nameFilm" placeholder="Movie's name">
+            <div id="name-film-error" class="message-error"></div>
+        </span>
+        <span>
+            <input id="genre" type="text" name="genre" placeholder="Genre">
+            <div id="genre-error" class="message-error"></div>
+        </span>
+        <span>
+            <input type="file" name="image">
+            <div id="img-error" class="message-error"></div>
+        </span>
+        <span>
+            <input type="file" name="chooser">
+            <div id="file-error" class="message-error"></div>
+        </span>
+        <span>
+            <textarea id="description" class="description" name="description" placeholder="Description"></textarea>
+            <div id="description-error" class="message-error"></div>
+        </span>
+    </div>
     <button id="add-link-film" type="submit">
         <i class="fas fa-plus"></i>
     </button>
