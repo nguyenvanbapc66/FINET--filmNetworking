@@ -294,7 +294,7 @@ view.showListFilms = async function () {
                         <source src="${film.link}" type="video/mp4">
                     </video>,
                     <span class="info-film">link image:</span>
-                    <img src="${film.image}">,
+                    <img style="width: 180px; height: 252px;" src="${film.image}">,
                     <span id="info-film-${film.id}" class="info-film">
                         ${film.name},
                         ${film.genre}
