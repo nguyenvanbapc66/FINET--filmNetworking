@@ -103,7 +103,7 @@ components.nav = `
                 <img id="avatar-8" src="./img/boy(4).png">
                 <i class="user-name" id="user-name"></i>
                 <br>
-                <span id="log-out">Sign Out</span>
+                <span id="log-out">Sign out of finet</span>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
         </div>
@@ -490,7 +490,7 @@ components.management = `
     <button id="add-link-film" type="submit">
         <i class="fas fa-plus"></i>
     </button>
-    <div class="avatar dropdown">
+    <div class="avatar drop-down">
         <img id="current-avatar" class="current-avatar" src="./img/man.png">
         <a class="drop-btn">
             <i class="fas fa-caret-down"></i>
