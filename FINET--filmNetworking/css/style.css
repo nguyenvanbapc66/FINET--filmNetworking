@@ -29,7 +29,7 @@ a:hover {
     color: #0088a9;
 }
 
-button {
+.btn {
     border: none;
     border-radius: 5px;
     width: 70%;
@@ -38,18 +38,19 @@ button {
     background: rgba(0, 136, 169, 1);
     color: #edf0f1;
     font-weight: 600;
+    height: fit-content;
 }
 
-button:hover {
+.btn:hover {
     cursor: pointer;
     background: rgba(0, 136, 169, 0.8);
 }
 
-button:focus {
+.btn:focus {
     outline: none;
 }
 
-button:disabled {
+.btn:disabled {
     background: #f2f2f2;
 }
 
@@ -522,7 +523,7 @@ textarea{
 
 .background-trailer-wrapper-table {
     margin-left: 30px;
-    width: 100%;
+    width: 25%;
     height: 100%;
 }
 
@@ -530,6 +531,9 @@ textarea{
     color: white;
 }
 
+.background-trailer-readable {
+    margin-top: 10px;
+}
 
 .image-trailer {
     width: 75%;
@@ -537,7 +541,8 @@ textarea{
     right: 0;
     top: 0;
     bottom: 0;
-   
+    overflow: hidden;
+
 }
 
 .image-trailer-fill {
@@ -547,6 +552,7 @@ textarea{
     bottom: 0;
     position: absolute;
     z-index: 0;
+    
     /* opacity: 30%;  test*/ 
 }
 
@@ -622,4 +628,34 @@ textarea{
     -ms-transform: scale(1.5); /* IE 9 */
     -webkit-transform: scale(1.5); /* Safari 3-8 */
     transform: scale(1.5); 
+}
+
+
+/* MODAL BOX */
+
+/* .chosen-box {
+    display: none;
+} */
+
+
+.modal-backdrop {
+ z-index: 0 !important;
+}
+
+.content-box {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.trailer, .film-detail, .film-description {
+    margin: 10px 30px !important;
+
+}
+
+.carousel-control-prev, .carousel-control-next{
+    width: auto !important;
+}
+
+#btn-show-box{
+    display: none;
 }

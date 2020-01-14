@@ -45,6 +45,43 @@ controller.login = async function(loginInfo){
     }
 }
 
+
+// About films
+controller.showInformationOfChosenFilm = function (e) {
+    console.log('run to here.')
+    console.log(e.target.id)
+    let currentID = e.target.id;
+    for (const film of model.films) {
+        if(currentID === film.id) {
+            // document.getElementById('type-of-film').innerText = 'Film Detail: ' + film.genre;
+            document.getElementById('description').innerText = 'Film Description:\n' + film.description;
+            document.getElementById('btn-show-box').click();
+        }
+        
+    }
+
+}
+
+
+
+controller.loadFilmsHomePage = async function(){
+    // 1. load data form db
+
+    let result = await firebase
+        .firestore()
+        .collection('films')
+        .get()
+    let docs = result.docs
+    let films = tranformDocs(docs)
+    
+    // 2. Save data to model
+    model.saveFilms(films)
+    
+    // 3. Display data
+    view.ShowListFilmsHomePage()
+}
+
+
 controller.loadFilms = async function(){
     // 1. load data form db
     let admin = firebase.auth().currentUser.email
