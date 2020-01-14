@@ -83,7 +83,10 @@ components.nav = `
         <a href="#Movies">Movies</a>
     </div>
     <div id="nav-contents-right" class="nav-contents-right">
+        <div>
         <input id="inputSearch" type="text" name="search" placeholder="Titles, people, genres">
+        <span id="search-error" style="color:red"></span>
+        </div>
         <div class="avatar drop-down">
             <img id="current-avatar" class="current-avatar" src="./img/man.png">
             <a class="drop-btn">
@@ -127,7 +130,7 @@ components.film = `
                         </p>
                         <div class="background-trailer-actions">
                             <a href="#" class="action-button">
-                                <button>Play</button>
+                                <button id="btnRandomFilm">Play</button>
                             </a>
                         </div>
                     </td>

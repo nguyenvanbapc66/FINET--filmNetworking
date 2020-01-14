@@ -79,8 +79,10 @@ controller.search = function (e) {
             || inputValue.trim() === " "
             || inputValue === ""
         ) {
-            alert('Enter value!');
+            document.getElementById('search-error').innerText = 'Enter valid value!';
+            // alert('Enter value!');
         } else {
+            document.getElementById('search-error').innerText = '';
             for (const film of model.films) {
                 if (film.name.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) {
                     result.push(film)

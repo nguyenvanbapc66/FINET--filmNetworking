@@ -148,7 +148,9 @@ view.showComponents = async function (name) {
 
                 let btnSearch = document.getElementById('inputSearch');
                 btnSearch.onkeypress = controller.search;
-                
+
+
+
                 break;
             }
             catch (error) {
@@ -159,74 +161,74 @@ view.showComponents = async function (name) {
 
 
         case 'management': {
-        let app = document.getElementById('app')
-        app.innerHTML = components.management + components.editModal
+            let app = document.getElementById('app')
+            app.innerHTML = components.management + components.editModal
 
-        controller.loadFilms()
-        controller.setupDatabaseChange()
+            controller.loadFilms()
+            controller.setupDatabaseChange()
 
-        let logOut = document.getElementById('log-out')
-        logOut.onclick = logOutClickHandler
+            let logOut = document.getElementById('log-out')
+            logOut.onclick = logOutClickHandler
 
-        let form = document.getElementById('form-upload')
-        form.onsubmit = addFilmSubmitHandler
+            let form = document.getElementById('form-upload')
+            form.onsubmit = addFilmSubmitHandler
 
-        async function addFilmSubmitHandler(e) {
-            e.preventDefault()
+            async function addFilmSubmitHandler(e) {
+                e.preventDefault()
 
-            let files = form.chooser.files
-            let file = files[0]
-            let filmImages = form.image.files
-            let filmImage = filmImages[0]
+                let files = form.chooser.files
+                let file = files[0]
+                let filmImages = form.image.files
+                let filmImage = filmImages[0]
 
-            try {
-                if (!file || !filmImage) {
-                    throw new Error('Please choose a file!')
+                try {
+                    if (!file || !filmImage) {
+                        throw new Error('Please choose a file!')
+                    }
+                } catch (err) {
+                    view.setText('file-error', err.message)
                 }
-            } catch (err) {
-                view.setText('file-error', err.message)
+
+                // event submit >> add film
+                let nameFilm = form.nameFilm.value.trim()
+                let genre = form.genre.value.trim()
+                let description = form.description.value.trim()
+                let link = await controller.upload(file)
+                let image = await controller.upload(filmImage)
+
+                let validateResult = [
+                    view.validate(nameFilm, 'name-film-error', "Please enter the movie's name"),
+                    view.validate(genre, 'genre-error', 'Please enter the genre'),
+                    view.validate(description, 'description-error', 'Please enter the description')
+                ]
+
+                let film = {
+                    admin: 'nguyenvanbapc66@gmail.com',
+                    name: nameFilm,
+                    genre: genre,
+                    link: link,
+                    nameLink: file.name,
+                    image: image,
+                    description: description
+                }
+
+                if (allPassed(validateResult)) {
+                    controller.addFilm(film)
+                }
             }
 
-            // event submit >> add film
-            let nameFilm = form.nameFilm.value.trim()
-            let genre = form.genre.value.trim()
-            let description = form.description.value.trim()
-            let link = await controller.upload(file)
-            let image = await controller.upload(filmImage)
+            view.changeAvatar()
 
-            let validateResult = [
-                view.validate(nameFilm, 'name-film-error', "Please enter the movie's name"),
-                view.validate(genre, 'genre-error', 'Please enter the genre'),
-                view.validate(description, 'description-error', 'Please enter the description')
-            ]
+            view.setText('user-name', firebase.auth().currentUser.displayName)
 
-            let film = {
-                admin: 'nguyenvanbapc66@gmail.com',
-                name: nameFilm,
-                genre: genre,
-                link: link,
-                nameLink: file.name,
-                image: image,
-                description: description
+            function logOutClickHandler() {
+                firebase.auth().signOut()
+                view.showComponents('login')
             }
 
-            if (allPassed(validateResult)) {
-                controller.addFilm(film)
-            }
+            break
         }
-
-        view.changeAvatar()
-
-        view.setText('user-name', firebase.auth().currentUser.displayName)
-
-        function logOutClickHandler() {
-            firebase.auth().signOut()
-            view.showComponents('login')
-        }
-
-        break
     }
-}
 }
 
 view.changeAvatar = function () {
@@ -265,7 +267,7 @@ view.ShowListFilmsHomePage = function () {
 
 
 // Show Summary About A Random Film Below The Header
-view.showSummaryAboutTheRandomFilm = function() {
+view.showSummaryAboutTheRandomFilm = function () {
 
     // Random film 
     let filmArray = model.films;
@@ -276,6 +278,18 @@ view.showSummaryAboutTheRandomFilm = function() {
     document.getElementById('background-trailer-description').innerText = filmArray[randomNumber].description;
     document.getElementById('image-trailer-fill').src = filmArray[randomNumber].image;
 
+    let btnPlayRandomFilm = document.getElementById('btnRandomFilm');
+    btnPlayRandomFilm.onclick = function () {
+        document.getElementById('video').innerHTML = ``;
+        document.getElementById('description').innerText = 'Film Description:\n' + filmArray[randomNumber].description;
+        document.getElementById('video').innerHTML = `
+                <video controls style=""width="100%">
+                <source src="${filmArray[randomNumber].link}" type="video/mp4">
+                </video>
+                `
+        document.getElementById('btn-show-box').click();
+
+    }
 }
 
 view.showListFilms = async function () {
@@ -410,22 +424,22 @@ function allPassed(validateResult) {
 }
 
 
-function initSliderData (innerSliderID, data) {
+function initSliderData(innerSliderID, data) {
     let html = '';
     for (let i = 0; i < data.length; i += 4) {
         html += i < 4 ? `<div class = "carousel-item active>
                 <div id="row-container" class="row-container" style="display: flex; width: 25%;" >
                 `
-                : `<div class = "carousel-item">
+            : `<div class = "carousel-item">
                 <div id="row-container" class="row-container" style="display: flex; width: 25%;" >
                 `;
 
-        for(let j = i; j < i + 4; j++) {
+        for (let j = i; j < i + 4; j++) {
             if (j >= data.length) {
                 break;
             } else {
                 html +=
-                `
+                    `
                     <img class="d-block w-100 image-film" id="${data[j].id}"
                     src="${data[j].image}" >
                     
@@ -435,8 +449,7 @@ function initSliderData (innerSliderID, data) {
 
         html += '</div>';
     }
-        document.getElementById(innerSliderID).innerHTML = html;
+    document.getElementById(innerSliderID).innerHTML = html;
 
 }
 
- 
