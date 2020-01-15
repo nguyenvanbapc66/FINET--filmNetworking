@@ -103,7 +103,7 @@ components.nav = `
                 <img id="avatar-8" src="./img/boy(4).png">
                 <i class="user-name" id="user-name"></i>
                 <br>
-                <span id="log-out">Sign Out</span>
+                <span id="log-out">Sign out of finet</span>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
         </div>

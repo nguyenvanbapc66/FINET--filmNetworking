@@ -193,6 +193,7 @@ view.showComponents = async function (name) {
                 let nameFilm = form.nameFilm.value.trim()
                 let genre = form.genre.value.trim()
                 let description = form.description.value.trim()
+                // upload film, image
                 let link = await controller.upload(file)
                 let image = await controller.upload(filmImage)
 
@@ -219,7 +220,7 @@ view.showComponents = async function (name) {
 
             view.changeAvatar()
 
-            view.setText('user-name', firebase.auth().currentUser.displayName)
+            view.setText('user-name', firebase.auth().currentUser.email)
 
             function logOutClickHandler() {
                 firebase.auth().signOut()
@@ -248,7 +249,6 @@ view.changeAvatar = function () {
 view.ShowListFilmsHomePage = function () {
     if (model.films) {
         let films = model.films
-        console.log(films)
         let TVShows = films.filter(function (item) {
             return item.genre === 'TVShows';
         });
