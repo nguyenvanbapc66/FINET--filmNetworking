@@ -195,10 +195,16 @@ view.showComponents = async function (name) {
                 let nameFilm = form.nameFilm.value.trim()
                 let genre = form.genre.value.trim()
                 let description = form.description.value.trim()
+                
                 // upload film, image
                 loader.innerHTML = '<i class="fa fa-spinner fa-spin"></i>'
-                let link = await controller.upload(file)
-                let image = await controller.upload(filmImage)
+                let link, image
+                try {
+                    link = await controller.upload(file)
+                    image = await controller.upload(filmImage)
+                } catch (err) {
+                    console.log(err.message)
+                }
 
                 let validateResult = [
                     view.validate(nameFilm, 'name-film-error', "Please enter the movie's name"),
@@ -206,17 +212,16 @@ view.showComponents = async function (name) {
                     view.validate(description, 'description-error', 'Please enter the description')
                 ]
 
-                let film = {
-                    admin: 'nguyenvanbapc66@gmail.com',
-                    name: nameFilm,
-                    genre: genre,
-                    link: link,
-                    nameLink: file.name,
-                    image: image,
-                    description: description
-                }
-
                 if (allPassed(validateResult)) {
+                    let film = {
+                        admin: 'nguyenvanbapc66@gmail.com',
+                        name: nameFilm,
+                        genre: genre,
+                        link: link,
+                        nameLink: file.name,
+                        image: image,
+                        description: description
+                    }
                     controller.addFilm(film)
                 }
                 loader.innerHTML = '<i class="fas fa-plus"></i>'
