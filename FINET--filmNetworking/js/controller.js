@@ -233,10 +233,8 @@ controller.upload = async function(file){
     let filePath = `upload/${fileName}`
     let fileRef = firebase.storage().ref().child(filePath)
     await fileRef.put(file)
-    let url = await fileRef.getDownloadURL();
-    return url;
-    // let fileLink = getFileUrl(fileRef)
-    // return fileLink
+    let url = await fileRef.getDownloadURL()
+    return url
 }
 
 function getFileUrl(fileRef){

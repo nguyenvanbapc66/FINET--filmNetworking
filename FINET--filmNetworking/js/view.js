@@ -170,6 +170,8 @@ view.showComponents = async function (name) {
             let logOut = document.getElementById('log-out')
             logOut.onclick = logOutClickHandler
 
+            let loader = document.getElementById('add-link-film')
+
             let form = document.getElementById('form-upload')
             form.onsubmit = addFilmSubmitHandler
 
@@ -194,6 +196,7 @@ view.showComponents = async function (name) {
                 let genre = form.genre.value.trim()
                 let description = form.description.value.trim()
                 // upload film, image
+                loader.innerHTML = '<i class="fa fa-spinner fa-spin"></i>'
                 let link = await controller.upload(file)
                 let image = await controller.upload(filmImage)
 
@@ -216,6 +219,7 @@ view.showComponents = async function (name) {
                 if (allPassed(validateResult)) {
                     controller.addFilm(film)
                 }
+                loader.innerHTML = '<i class="fas fa-plus"></i>'
             }
 
             view.changeAvatar()
