@@ -72,6 +72,7 @@ controller.search = function (e) {
         let inputValue = document.getElementById('inputSearch').value;
         let result = [];
         let html = `<span style="display:flex >`;
+        let nameFilm = ''
         console.log(result)
         if (inputValue.indexOf(" ") !== -1
             || inputValue.trim() === null
@@ -101,6 +102,7 @@ controller.search = function (e) {
                 <img src ="${element.image}" id=${element.id} class="video-display image-film d-block">
                 </div>
                 `
+                nameFilm = element.name
             };
 
             document.getElementById('content').innerHTML = 
@@ -135,7 +137,7 @@ controller.search = function (e) {
                                 </div>
                                 <div class="film-detail" id="type-of-film">
                                     <h2>Film Detail:</h2>
-                                   
+                                    <i>${nameFilm}</i>
                                 </div>
                                 <div class="film-description" >
                                     <h2>Film Description:</h2>
