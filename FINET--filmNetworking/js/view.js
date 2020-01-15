@@ -280,7 +280,7 @@ view.showSummaryAboutTheRandomFilm = function () {
 
     // Random film 
     let filmArray = model.films;
-    let randomNumber = Math.floor(Math.random() * 3);
+    let randomNumber = Math.floor(Math.random() * filmArray.length);
 
     document.getElementById('film-name').innerText = filmArray[randomNumber].name;
     document.getElementById('background-trailer-year').innerText = filmArray[randomNumber].genre;
