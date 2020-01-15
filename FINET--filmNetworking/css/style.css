@@ -665,3 +665,9 @@ textarea{
 .trailer {
     max-width: fit-content !important;
 }
+
+.image-film { 
+    height: fit-content;
+    width: 400px;
+    height: 400px;
+}

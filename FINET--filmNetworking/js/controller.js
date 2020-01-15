@@ -71,16 +71,17 @@ controller.search = function (e) {
     if (e.keyCode == 13) {
         let inputValue = document.getElementById('inputSearch').value;
         let result = [];
-        let html = ``;
+        let html = `<span style="display:flex >`;
         console.log(result)
         if (inputValue.indexOf(" ") !== -1
             || inputValue.trim() === null
+            || inputValue.trim() === 'null'
             || inputValue.trim() === undefined
+            || inputValue.trim() === 'undefined'
             || inputValue.trim() === " "
             || inputValue === ""
         ) {
             document.getElementById('search-error').innerText = 'Enter valid value!';
-            // alert('Enter value!');
         } else {
             document.getElementById('search-error').innerText = '';
             for (const film of model.films) {
@@ -92,19 +93,71 @@ controller.search = function (e) {
 
             }
 
+            // <video width="400px" height="200px" controls class="video-display">
+                //      <source src="${element.link}" type="video/mp4">
+                // </video>
             for (const element of result) {
-                html += `
-            <span style="display:flex">
-                <video width="400px" height="200px" controls class="video-display">
-                     <source src="${element.link}" type="video/mp4">
-                </video>
-                <img src ="${element.image}" width="400px" height="200px" class="video-display">
-            </span>
+                html += ` <div ">
+                <img src ="${element.image}" id=${element.id} class="video-display image-film d-block">
+                </div>
                 `
             };
-            console.log(result)
-            document.getElementById('content').innerHTML = html;
+
+            document.getElementById('content').innerHTML = 
+            `
+            <!-- Information Box of The Chosen  -->
+            <div class="chosen-box">
+                
+                <button type="button" class="btn btn-primary" id="btn-show-box" data-toggle="modal"
+                    data-target=".bd-example-modal-xl">Extra large modal</button>
+            
+                <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" id="chosen-box" role="document">
+                        <div class="modal-content content-box">
+                            <div class="modal-header" style="border: none;">
+                                <!-- <h5 class="modal-title h4" id="myExtraLargeModalLabel" style="color: black;">
+                  Extra large modal
+                </h5> -->
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" 
+                                style="display:flex;
+                                justify-content: flex-end; 
+                                width: fit-content;
+                                height: fit-content;
+                                background: white;">
+                                     <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="color: black !important;">
+                                <div class="trailer" >
+                                    <h2>Video</h2>
+                                    <span id="video"></span>
+                                </div>
+                                <div class="film-detail" id="type-of-film">
+                                    <h2>Film Detail:</h2>
+                                   
+                                </div>
+                                <div class="film-description" >
+                                    <h2>Film Description:</h2>
+                                    <span id="description">
+                                   
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `            
+            + html + '</span>';
+
+            // Add event click film - image
+            let listImages = document.getElementsByClassName('image-film');
+            for (const img of listImages) {
+                img.onclick = controller.showInformationOfChosenFilm;
+            }
         };
+
 
     }
 

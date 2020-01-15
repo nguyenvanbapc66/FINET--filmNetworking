@@ -271,7 +271,7 @@ view.showSummaryAboutTheRandomFilm = function () {
 
     // Random film 
     let filmArray = model.films;
-    let randomNumber = Math.floor(Math.random() * 2);
+    let randomNumber = Math.floor(Math.random() * 8);
 
     document.getElementById('film-name').innerText = filmArray[randomNumber].name;
     document.getElementById('background-trailer-year').innerText = filmArray[randomNumber].genre;
@@ -281,7 +281,7 @@ view.showSummaryAboutTheRandomFilm = function () {
     let btnPlayRandomFilm = document.getElementById('btnRandomFilm');
     btnPlayRandomFilm.onclick = function () {
         document.getElementById('video').innerHTML = ``;
-        document.getElementById('description').innerText = 'Film Description:\n' + filmArray[randomNumber].description;
+        document.getElementById('description').innerText = '\n' + filmArray[randomNumber].description;
         document.getElementById('video').innerHTML = `
                 <video controls style=""width="100%">
                 <source src="${filmArray[randomNumber].link}" type="video/mp4">
